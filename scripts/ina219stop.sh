@@ -1,0 +1,1 @@
+echo "ina219 stop"

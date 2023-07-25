@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Controles</title>
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <%- include('partials/_navbar') %>
+
+    <h1 class="title bold-text">Página de Control del Nodo</h1>
+
+    <div class="text-center top-space-button">
+      <img src="/img/conexionant.png" alt="Nodo Movil" class="mx-auto img-responsive">
+    </div>
+
+    <div class="container text-center top-space-button">
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <div class="row top-space-button">
+            <div class="col-md-6">
+              <form action="/apagarNodo" method="post">
+                <button type="submit" class="btn btn-danger btn-block">Apagar Nodo</button>
+              </form>
+            </div>
+            <div class="col-md-6">
+              <form action="/reiniciarNodo" method="post">
+                <button type="submit" class="btn btn-primary btn-block">Reiniciar Nodo</button>
+              </form>
+            </div>
+          </div>
+          <div class="row top-space-button">
+            <div class="col-md-6">
+              <form action="/olsr" method="post">
+                <button type="submit" class="btn btn-secondary btn-block">Protocolo OLSR</button>
+              </form>
+            </div>
+            <div class="col-md-6">
+              <form action="/batman" method="post">
+                <button type="submit" class="btn btn-secondary btn-block">Protoclo B.A.T.M.A.N. Adv.</button>
+              </form>
+            </div>
+          </div>
+          <div class="row top-space-button">
+            <div class="col-md-6">
+              <form action="/tcpdumpStart" method="post">
+                <button type="submit" class="btn btn-secondary btn-block">Iniciar Captura de Tráfico</button>
+              </form>         
+            </div>
+            <div class="col-md-6">
+              <form action="/tcpdumpStop" method="post">
+                <button type="submit" class="btn btn-secondary btn-block">Detener Captura de Tráfico</button>
+              </form> 
+            </div>
+          </div>
+          <div class="row top-space-button">
+            <div class="col-md-6">
+              <form action="/ina219Start" method="post">
+                <button type="submit" class="btn btn-secondary btn-block">Iniciar Medición de Consumo Energético</button>
+              </form>
+            </div>
+            <div class="col-md-6">
+              <form action="/ina219Stop" method="post">
+                <button type="submit" class="btn btn-secondary btn-block">Detener Medición de Consumo Energético</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+</body>
+</html>

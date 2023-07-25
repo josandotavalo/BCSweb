@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Comunicación Unidireccional</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/styles.css" />
+    <script src="/socket.io/socket.io.js"></script>
+  </head>
+  <body>
+    <%- include('partials/_navbar') %>
+
+    <h1 class="title bold-text">Páginal de Comunicación Unidireccional</h1>
+
+    <div class="text-center top-space-button">
+      <img src="/img/esc1.png" alt="Escenario 1" class="mx-auto img-esc" />
+    </div>
+
+    <h2 class="title bold-text">Nodo 4 Rx</h2>
+
+    <div class="container text-center top-space-button">
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <div class="row top-space-button">
+            <div class="col-md-6">
+              <h2 class="title">Micrófono Desactivado:</h2>
+            </div>
+            <div class="col-md-6">
+              <img
+                src="/img/microRojo.jpg"
+                alt="Microfono"
+                class="mx-auto img-micro title"
+              />
+            </div>
+          </div>
+          <div class="row top-space-button">
+            <div class="col-md-6">
+              <h2 class="title" class="title">Reproductor Activado:</h2>
+            </div>
+            <div class="col-md-6">
+              <audio id="audioPlayer" controls></audio>
+            </div>
+          </div>
+          <div class="row top-space-button">
+            <div class="col-md-6">
+              <div class="form-group">
+                <h2 class="title">Mensaje recibido:</h2>
+              </div>
+            </div>
+            <div class="col-md-6">
+                <div class="title" id="messageDisplay"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Conexión al servidor Socket.IO
+      const socket = io();
+
+      // Obtener referencia al elemento de audio
+      const audioPlayer = document.getElementById("audioPlayer");
+
+      // Crear objeto MediaSource
+      const mediaSource = new MediaSource();
+      audioPlayer.src = URL.createObjectURL(mediaSource);
+
+      // Crear URL Blob y establecerla como fuente de audio
+      mediaSource.addEventListener("sourceopen", () => {
+        const sourceBuffer = mediaSource.addSourceBuffer("audio/aac");
+
+        socket.on("audio", (data) => {
+          sourceBuffer.appendBuffer(data);
+        });
+      });
+
+      // Mostrar los mensajes recibidos
+      socket.on("message", (message) => {
+        const messageDisplay = document.getElementById("messageDisplay");
+
+        // Eliminar el contenido anterior
+        while (messageDisplay.firstChild) {
+          messageDisplay.removeChild(messageDisplay.firstChild);
+        }
+
+        // Mostrar el nuevo mensaje
+        const messageElement = document.createElement("p");
+        messageElement.textContent = message;
+        messageDisplay.appendChild(messageElement);
+      });
+
+      // Obtener acceso al micrófono del navegador
+      // navigator.mediaDevices.getUserMedia({ audio: true })
+      //   .then((stream) => {
+      //     const audioContext = new AudioContext();
+      //     const mediaStreamSource = audioContext.createMediaStreamSource(stream);
+      //     const scriptProcessor = audioContext.createScriptProcessor(4096, 1, 1);
+
+      //     // Conectar el micrófono al scriptProcessor y al destino de salida
+      //     mediaStreamSource.connect(scriptProcessor);
+      //     scriptProcessor.connect(audioContext.destination);
+
+      //     // Escuchar eventos de audio capturado por el micrófono
+      //     scriptProcessor.addEventListener('audioprocess', (event) => {
+      //       const audioData = event.inputBuffer.getChannelData(0);
+      //       socket.emit('audio', audioData);
+      //     });
+      //   })
+      //   .catch((error) => {
+      //     console.error('Error al acceder al micrófono:', error);
+      //   });
+    </script>
+  </body>
+</html>

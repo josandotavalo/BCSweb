@@ -1,0 +1,51 @@
+.title {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.top-space {
+    margin-top: 100px;
+}
+
+.top-space-button {
+    margin-top: 20px;
+}
+
+.bold-text {
+    font-weight: bold;
+}
+
+.img-responsive {
+    max-width: 30%;
+    height: auto;
+}
+
+.img-esc {
+    max-width: 50%;
+    height: auto;
+}
+
+.img-micro {
+    max-width: 15%;
+    height: auto;
+}
+
+.left-aligned {
+    text-align: left;
+    margin-left: 300px;
+}
+  
+.message-box {
+    background-color: #f8f9fa;
+    border: 1px solid #ced4da;
+    padding: 10px;
+    margin-bottom: 20px;
+  }
+
+/* Estilo para el contenedor de mensajes recibidos */
+#messageDisplay {
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: 300px;
+    text-align: center;
+  }

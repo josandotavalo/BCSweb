@@ -1,5 +1,5 @@
 # Aplicación web móvil
-Este repositorio contiene los archivos de un servidor web desplegado en cada nodo (Raspberry Pi) de una MANET.
+Este repositorio contiene los archivos de un servidor web desplegado en cada nodo (Raspberry Pi) de una MANET para el proyecto de tesis denominado Aplicación de MANET's como Sistema de Comunicación en la Movilidad Sostenible. 
 
 ## Instalación de NodeJS en RPi
 1. Repositorio de versión LTS release

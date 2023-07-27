@@ -14,7 +14,7 @@ sudo apt install nodejs
 ```
 node -v
 ```
-## Descripción de los directorios y archivos
+## Descripción de directorios y archivos
 1. El archivo server.js hace uso de modulos express y socketio para desplegar la página web y realizar acciones tanto a nivel del frontend como el backend.
 2. Los archivos package-lock.json y package.json contienen toda la información de los módulos de la aplicación web empleados.
 3. El directorio certs contiene los certificados autofirmados empleados por la aplicación mediante HTTPS

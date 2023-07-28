@@ -174,7 +174,7 @@ let scriptProcess8;
 
 app.post('/ina219Stop', (req, res) => {
   console.log('Ejecutando el script...');
-  scriptProcess8 = exec('bash ./scripts/ina219stop.sh');
+  scriptProcess8 = exec('bash ./scripts/ntpconfigura.sh');
   scriptProcess8.stdout.on('data', (data) => {
     console.log(`Salida del script: ${data}`);
   });

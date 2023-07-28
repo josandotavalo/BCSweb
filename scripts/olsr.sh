@@ -17,3 +17,5 @@ sudo ifconfig wlan1 10.0.0.12/24
 
 # OLSRd
 sudo olsrd -i wlan1
+
+exit

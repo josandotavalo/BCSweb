@@ -53,3 +53,37 @@ pm2 save
 ```
 pm2 show mynodeapp
 ```
+## Comandos de FFMPEG
+1. Acceso del micrófono y envío del audio capturado por medio de mpegts/udp
+```
+// Proceso FFmpeg para redirigir el audio desde el navegador del cliente hacia las Raspberry Pi
+const ffmpegProcessOut = spawn('ffmpeg', [
+  '-f', 'f32le',
+  '-ar', '48000',
+  '-ac', '1',
+  '-i', 'pipe:0',
+  '-c:a', 'aac',
+  '-preset', 'ultrafast',
+  '-tune', 'zerolatency',
+  '-fflags', '+nobuffer',
+  '-flush_packets', '0',
+  '-b:a', '64k',
+  '-f', 'mpegts',
+  'udp://10.0.0.14:12345'
+]);
+```
+2. Reproducción del audio recibido por mpegts/udp en el navegador
+```
+// Proceso FFmpeg para recibir el audio desde la Raspberry Pi y transmitirlo al navegador del cliente
+const ffmpegProcessIn = spawn('ffmpeg', [
+  '-probesize', '50000',
+  '-i', 'udp://10.0.0.14:12346',
+  '-c:a', 'aac',
+  '-preset', 'ultrafast',
+  '-tune', 'zerolatency',
+  '-fflags', '+nobuffer',
+  '-flush_packets', '0',
+  '-f', 'adts',
+  'pipe:1'
+]);
+```

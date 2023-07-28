@@ -41,9 +41,13 @@ const ffmpegProcessOut = spawn('ffmpeg', [
   '-ac', '1',
   '-i', 'pipe:0',
   '-c:a', 'aac',
-  '-b:a', '192k',
+  '-preset', 'ultrafast',
+  '-tune', 'zerolatency',
+  '-fflags', '+nobuffer',
+  '-flush_packets', '0',
+  '-b:a', '64k',
   '-f', 'mpegts',
-  'udp://localhost:12345'
+  'udp://10.0.0.14:12345'
 ]);
 
 // Escuchar eventos de salida de FFmpeg para redirigir
@@ -57,8 +61,13 @@ ffmpegProcessOut.on('close', (code) => {
 
 // Proceso FFmpeg para recibir el audio desde la Raspberry Pi 2 y transmitirlo al navegador del cliente
 const ffmpegProcessIn = spawn('ffmpeg', [
-  '-i', 'udp://localhost:12345',
-  '-acodec', 'aac',
+  '-probesize', '50000',
+  '-i', 'udp://10.0.0.14:12346',
+  '-c:a', 'aac',
+  '-preset', 'ultrafast',
+  '-tune', 'zerolatency',
+  '-fflags', '+nobuffer',
+  '-flush_packets', '0',
   '-f', 'adts',
   'pipe:1'
 ]);
